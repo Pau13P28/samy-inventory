@@ -1,0 +1,108 @@
+{
+  "info": {
+    "name": "SAMY Cosmetics - API Inventario",
+    "description": "Colección para probar los endpoints del sistema de inventarios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"correo\": \"admin@samy.com\",\n  \"contrasena\": \"admin123\"\n}"
+        },
+        "url": "{{base_url}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Productos - Listar",
+      "request": { "method": "GET", "url": "{{base_url}}/api/productos" }
+    },
+    {
+      "name": "Productos - Crear",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"DEL001\",\n  \"nombre\": \"Delineador Negro\",\n  \"descripcion\": \"Delineador líquido\",\n  \"precio\": 18900,\n  \"stock\": 150,\n  \"stock_minimo\": 20,\n  \"id_categoria\": null\n}"
+        },
+        "url": "{{base_url}}/api/productos"
+      }
+    },
+    {
+      "name": "Productos - Obtener por ID",
+      "request": { "method": "GET", "url": "{{base_url}}/api/productos/1" }
+    },
+    {
+      "name": "Productos - Actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"precio\": 19900\n}"
+        },
+        "url": "{{base_url}}/api/productos/1"
+      }
+    },
+    {
+      "name": "Productos - Eliminar",
+      "request": { "method": "DELETE", "url": "{{base_url}}/api/productos/1" }
+    },
+    {
+      "name": "Movimientos - Listar",
+      "request": { "method": "GET", "url": "{{base_url}}/api/movimientos" }
+    },
+    {
+      "name": "Movimientos - Registrar entrada",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tipo_movimiento\": \"entrada\",\n  \"cantidad\": 50,\n  \"observaciones\": \"Compra a proveedor\",\n  \"id_producto\": 1,\n  \"id_usuario\": 1\n}"
+        },
+        "url": "{{base_url}}/api/movimientos"
+      }
+    },
+    {
+      "name": "Movimientos - Registrar salida (con validación de stock)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tipo_movimiento\": \"salida\",\n  \"cantidad\": 9999,\n  \"observaciones\": \"Prueba de stock insuficiente\",\n  \"id_producto\": 1,\n  \"id_usuario\": 1\n}"
+        },
+        "url": "{{base_url}}/api/movimientos"
+      }
+    },
+    {
+      "name": "Usuarios - Listar",
+      "request": { "method": "GET", "url": "{{base_url}}/api/usuarios" }
+    },
+    {
+      "name": "Usuarios - Crear",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Carlos\",\n  \"apellido\": \"Ruiz\",\n  \"correo\": \"carlos.ruiz@samy.com\",\n  \"rol\": \"auxiliar\",\n  \"contrasena\": \"clave123\"\n}"
+        },
+        "url": "{{base_url}}/api/usuarios"
+      }
+    },
+    {
+      "name": "Categorias - Listar",
+      "request": { "method": "GET", "url": "{{base_url}}/api/categorias" }
+    }
+  ]
+}
